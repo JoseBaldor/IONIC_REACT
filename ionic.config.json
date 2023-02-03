@@ -1,0 +1,7 @@
+{
+  "name": "SICEUIIM",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
