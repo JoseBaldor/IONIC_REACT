@@ -29,6 +29,13 @@ const appPages: AppPage[] = [
     mdIcon: people
   },
   {
+    title: 'Listado de Materias',
+    url: '/page/Materias',
+    iosIcon: peopleOutline,
+    mdIcon: people
+  },
+
+  {
     title: 'Sistema',
     url: '/page/Sistema',
     iosIcon: paperPlaneOutline,

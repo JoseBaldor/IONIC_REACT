@@ -23,6 +23,8 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import AlumnosLista from './pages/alumnos/AlumnosLista';
 import AlumnoEdit from './pages/alumnos/AlumnoEdit';
+import MateriasLista from './pages/materias/MateriasLista';
+import MateriaEdit from './pages/materias/MateriaEdit';
 
 setupIonicReact();
 
@@ -41,6 +43,12 @@ const App: React.FC = () => {
             </Route>
             <Route path="/page/alumno/:id" exact={true}>
               <AlumnoEdit/>
+            </Route>
+            <Route path="/page/materias/" exact={true}>
+              <MateriasLista/>
+            </Route>
+            <Route path="/page/materia/:id" exact={true}>
+              <MateriaEdit/>
             </Route>
 
           </IonRouterOutlet>

@@ -3,13 +3,13 @@ import { Console, debug } from 'console';
 import { add, checkmark, close, pencil, save } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import { saveAlumno, searchAlumnoById } from './AlumnoApi';
-import Alumnos from './Alumnos';
+import { saveMateria, searchMateriaById } from './MateriasApi';
+import Materias from './Materias';
 
-const AlumnoEdit: React.FC = () => {
+const MateriaEdit: React.FC = () => {
 
   const { name, id } = useParams<{ name: string; id: string;}>();
-  const [alumnos, setAlumnos] = useState<Alumnos>({});
+  const [materias, setMaterias] = useState<Materias>({});
   const history = useHistory();
 
   useEffect(()=>{
@@ -18,16 +18,16 @@ const AlumnoEdit: React.FC = () => {
 
   const search =()=>{
     if(id !== 'new'){
-      let result = searchAlumnoById(id);
-      setAlumnos(result);
+      let result = searchMateriaById(id);
+      setMaterias(result);
     }
-    // const result = searchAlumnos();
-    // setAlumnos(result);
+    // const result = searchMaterias();
+    // setMaterias(result);
   }
   const save = () =>{
     // debugger;
-    saveAlumno(alumnos);
-    history.push('/page/alumnos');
+    saveMateria(materias);
+    history.push('/page/materias');
 
   }
 
@@ -38,46 +38,30 @@ const AlumnoEdit: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Alumnos</IonTitle>
+          <IonTitle>Materias</IonTitle>
         </IonToolbar>
       </IonHeader>
 
       <IonContent fullscreen>
         <IonContent>
           <IonCard>
-            <IonTitle>{id === 'new'? "Agregar Alumno":"Editar Alumno"}</IonTitle>
+            <IonTitle>{id === 'new'? "Agregar Materia":"Editar Materia"}</IonTitle>
             <IonGrid>
               <IonRow>
                 <IonCol>
                   <IonItem>
-                    <IonLabel position="stacked">Matricula</IonLabel>
-                    <IonInput onIonChange={e => alumnos.id = String(e.detail.value)} value={alumnos.id} placeholder="Enter text"></IonInput>
+                    <IonLabel position="stacked">Id</IonLabel>
+                    <IonInput onIonChange={e => materias.id = String(e.detail.value)} value={materias.id} placeholder="Enter text"></IonInput>
                   </IonItem>
                 </IonCol>
                 <IonCol>
                   <IonItem>
                     <IonLabel position="stacked">Nombre</IonLabel>
-                    <IonInput onIonChange={e => alumnos.name = String(e.detail.value)} value={alumnos.name} placeholder="Enter text"></IonInput>
+                    <IonInput onIonChange={e => materias.name = String(e.detail.value)} value={materias.name} placeholder="Enter text"></IonInput>
                   </IonItem>
                 </IonCol>
               </IonRow>
-              <IonRow>
-                <IonCol>
-                  <IonItem>
-                    <IonLabel position="stacked">Email</IonLabel>
-                    <IonInput onIonChange={e => alumnos.email = String(e.detail.value)} value={alumnos.email} placeholder="Enter text"></IonInput>
-                  </IonItem>
-                </IonCol>
-                <IonCol>
-                  <IonItem>
-                    <IonLabel position="stacked">Dirección</IonLabel>
-                    <IonInput onIonChange={e => alumnos.address = String(e.detail.value)} value={alumnos.address} placeholder="Enter text"></IonInput>
-                  </IonItem>
-                </IonCol>
-              </IonRow>
-  
             </IonGrid>
-
             <IonItem>
               <IonButton onClick={save} color="success" fill='solid' slot='end' size='default'>
                 <IonIcon icon={checkmark}/>
@@ -91,4 +75,4 @@ const AlumnoEdit: React.FC = () => {
   );
 };
 
-export default AlumnoEdit;
+export default MateriaEdit;

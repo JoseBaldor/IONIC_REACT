@@ -3,14 +3,14 @@ import { add, close, pencil } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
 // import ExploreContainer from '../../components/ExploreContainer';
-import { removeAlumno, saveAlumno, searchAlumnos } from './AlumnoApi';
-import Alumnos from './Alumnos';
+import { removeMateria, saveMateria, searchMaterias } from './MateriasApi';
+import Materias from './Materias';
 
 
-const AlumnosLista: React.FC = () => {
+const MateriasLista: React.FC = () => {
 
   const { name } = useParams<{ name: string; }>();
-  const [alumnos, setAlumnos] = useState<Alumnos[]>([]);
+  const [materias, setMaterias] = useState<Materias[]>([]);
   const history = useHistory();
 
   useEffect(()=>{
@@ -18,12 +18,12 @@ const AlumnosLista: React.FC = () => {
   },[history.location.pathname]);
 
   const search =()=>{
-    const result = searchAlumnos();
-    setAlumnos(result);
+    const result = searchMaterias();
+    setMaterias(result);
   }
 
   const remove = (id: string) =>{
-    removeAlumno(id);
+    removeMateria(id);
     search();
   }
 
@@ -35,16 +35,16 @@ const AlumnosLista: React.FC = () => {
   //     address: 'la que sea 907'
   //   };
 
-  //   saveAlumno(ejemplo);
+  //   saveMateria(ejemplo);
   //   search();
   // }
 
-  const addAlumnos = () =>{
-    history.push('/page/alumno/new');
+  const addMaterias = () =>{
+    history.push('/page/materia/new');
   }
 
-  const editAlumnos = (id: string) =>{
-    history.push('/page/alumno/'+ id);
+  const editMaterias = (id: string) =>{
+    history.push('/page/materia/'+ id);
   }
 
   return (
@@ -54,7 +54,7 @@ const AlumnosLista: React.FC = () => {
           <IonButtons slot="start">
             <IonMenuButton />
           </IonButtons>
-          <IonTitle>Alumnos </IonTitle>
+          <IonTitle>Materias </IonTitle>
         </IonToolbar>
       </IonHeader>
 
@@ -68,30 +68,26 @@ const AlumnosLista: React.FC = () => {
         <IonContent>
           <IonCard>
             <IonItem>
-              <IonButton onClick={addAlumnos} color="primary" fill='solid' slot='end' size='default'>
+              <IonButton onClick={addMaterias} color="primary" fill='solid' slot='end' size='default'>
                 <IonIcon icon={add}/>
-                Agregar Alumno
+                Agregar Materia
                 </IonButton>
             </IonItem>
             <IonGrid className='table'>
               <IonRow>
-                <IonCol>Matricula</IonCol>
+                <IonCol>Id</IonCol>
                 <IonCol>Nombre</IonCol>
-                <IonCol>Email</IonCol>
-                <IonCol>Dirección</IonCol>
                 <IonCol>Acciones</IonCol>
               </IonRow>
-              {alumnos.map((alumno:Alumnos)=>
-                <IonRow key={alumno.id}>
-                  <IonCol>{alumno.id}</IonCol>
-                  <IonCol>{alumno.name}</IonCol>
-                  <IonCol>{alumno.email}</IonCol>
-                  <IonCol>{alumno.address}</IonCol>
+              {materias.map((materia:Materias)=>
+                <IonRow key={materia.id}>
+                  <IonCol>{materia.id}</IonCol>
+                  <IonCol>{materia.name}</IonCol>
                   <IonCol>
-                    <IonButton onClick={()=> editAlumnos(String(alumno.id))} color='primary' fill='clear'>
+                    <IonButton onClick={()=> editMaterias(String(materia.id))} color='primary' fill='clear'>
                       <IonIcon icon={pencil} slot='icon-only'/>
                     </IonButton>
-                    <IonButton  color='danger' fill='clear' onClick={()=>{remove(String(alumno.id))}}>
+                    <IonButton  color='danger' fill='clear' onClick={()=>{remove(String(materia.id))}}>
                       <IonIcon icon={close} slot='icon-only'/>
                     </IonButton>
                   </IonCol>
@@ -109,4 +105,4 @@ const AlumnosLista: React.FC = () => {
   );
 };
 
-export default AlumnosLista;
+export default MateriasLista;
